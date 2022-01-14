@@ -1,32 +1,46 @@
 import React, {useEffect, useState} from "react";
 import DailyWeatherData from "./DailyWeatherData";
 
-function WeatherDataContainer() {
-    const cityName = 'Toronto';
-    const API_KEY = '7f98faafd273743054dd8af038877963';
+function WeatherDataContainer() {    
+    const API_KEY = 'eff04efa5709d18068cb132cce23a366';        
 
-    const [dataList, setDataList] = useState([]);
+    const [data, setData] = useState('');
+    const [location, setLocation] = useState('');
 
-    function fetchWeatherData() {
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${API_KEY}`)
+    function fetchWeatherData(loc) {
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${loc}&appid=${API_KEY}`)
         .then((r) => r.json())
-        .then(data => {                
-            setDataList(data.list.slice(0,3));
+        .then(data => {
+            // console.log(`data from api: ${JSON.stringify(data.list[0].main)}`);
+            setData(data.list[0]);
+        })
+    }
+
+    function fetchCurrentLocation() {
+        fetch("https://geolocation-db.com/json/")
+        .then((r) => r.json())
+        .then(data => {
+            // console.log(`data from api: ${JSON.stringify(data)}`);
+            setLocation(data.country_name);
+            fetchWeatherData(data.country_name);
         })
     }
 
     useEffect(() => {
-        fetchWeatherData();
+        fetchCurrentLocation();        
     }, [])
 
-    return (
-        <div className='container'>
-            <h3> Weather Today for {cityName} </h3>
-            { dataList.map((weatherData) => {
-                    return <WeatherDataContainer weatherData={weatherData} />;
-                })
+    if (data === '') {
+        return <div> Loading! </div>
+    }
 
-            }
+    console.log(`data: ${JSON.stringify(data)} | location: ${location}`);
+
+    return (        
+        <div style={{
+            backgroundImage: `url(require("images/weather-app-background.jpeg"))`
+        }} className="body-app">
+            <DailyWeatherData weatherData={data} location={location} />
         </div>
     );
 }
