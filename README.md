@@ -68,3 +68,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Weather App Description
+
+The app fetches the user's current location data using an api call to the https://geolocation-db.com/json/ free location data provider.
+Then, the app uses the user's current location data to make another API call to openweathermap to fetch the current weather data for the user's current location.
+The weather data is then displayed in the UI in this single page react application. All the temperatures are returned in kelvin unit from the openweathermap API JSON response.
+The app then converts the temperatures to fahrenheit to make it look more user-friendly. The app was tested in multiple browsers e.g. chrome, safari etc. and it's responsive across brwosers and the mobile UIs. The app was built using creact-react-app and react version 17.0.2. And, the instructions for running the app are described above.
+
+The app has two main react components:
+
+1. `WeatherDataContainer`
+2. `DailyWeatherData`
+
+`WeatherDataContainer` component is responsible for making the API calls and fetching JSON data from 2 different APIs (location and weather data).
+`DailyWeatherData` component is responsible for displaying the weather data in the UI and is used inside the `WeatherDataContainer` component.
+`weatherData` and `locaton` are fetched from the APIs and are passed as props to the `DailyWeatherData` component which then uses those data and displays them in the UI.

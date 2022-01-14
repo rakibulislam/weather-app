@@ -13,7 +13,7 @@ function DailyWeatherData({weatherData, location}) {
     }
 
     function processData(){
-        console.log(`weatherData: ${JSON.stringify(weatherData)}`);
+        // console.log(`weatherData: ${JSON.stringify(weatherData)}`);
         setMinTemp(kelvinToFahrenheit(weatherData.main.temp_min));
         setMaxTemp(kelvinToFahrenheit(weatherData.main.temp_max));
         setCurrentTemp(kelvinToFahrenheit(weatherData.main.temp));
@@ -27,7 +27,7 @@ function DailyWeatherData({weatherData, location}) {
     }, [])
 
     return (        
-        <div style={{backgroundImage: `url(${process.env.PUBLIC_URL + '/images/weather-app-background.jpeg'})`}} className='app'>
+        <div className='app'>
             <h1> Weather Today for {location} </h1>
             <h4> Temperature: {currentTemp}°F </h4>
             <h4> Fells Like: {fellsLikeTemp}°F </h4>

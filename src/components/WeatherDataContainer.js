@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import DailyWeatherData from "./DailyWeatherData";
 
-function WeatherDataContainer() {    
-    const API_KEY = 'eff04efa5709d18068cb132cce23a366';        
+function WeatherDataContainer() {
+    const API_KEY = 'eff04efa5709d18068cb132cce23a366';
 
     const [data, setData] = useState('');
     const [location, setLocation] = useState('');
@@ -27,7 +27,7 @@ function WeatherDataContainer() {
     }
 
     useEffect(() => {
-        fetchCurrentLocation();        
+        fetchCurrentLocation();
     }, [])
 
     if (data === '') {
